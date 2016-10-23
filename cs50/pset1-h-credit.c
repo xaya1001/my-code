@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <cs50.h>
 
 /**
  * prompts the user for a credit card number and then reports
@@ -16,12 +15,13 @@
 int main(void) {
     int digit;
     int sum = 0, len = 0;
-    string card = "";
-    
+    char *card = "";
+
     // ask user for input a credit card number
     printf("Number: ");
-    long long number = GetLongLong();
-    
+    long long number;
+    scanf("%lli", &number);
+
     // calculate the checksum
     while (number > 0) {
         digit = number % 100;
@@ -32,11 +32,11 @@ int main(void) {
             int temp = digit/10*2;
             sum += digit % 10 + temp % 10 + temp / 10;
         }
-        
+
         number /= 100;
         len += 2;
     }
-    
+
     // minus one when the lenth of number is odd
     if (digit < 10) {
         len -= 1;
@@ -60,8 +60,8 @@ int main(void) {
     else {
         card = "INVALID\n";
     }
-    
+
     printf("%s", card);
-    
+
     return 0;
 }
